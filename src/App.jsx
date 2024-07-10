@@ -1,7 +1,8 @@
+import Home from "./component/Home";
 const App = () =>{
   return(
     <>
-    <h1>This is app</h1>
+      <Home></Home>
     </>
   );
 }

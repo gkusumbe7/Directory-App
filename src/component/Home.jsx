@@ -1,4 +1,5 @@
 import AddPersonInfo from "./AddPersonInfo"
+import DefaultTable from "./DefaultTable";
 const Home = ()=>{
     return(<>
        <nav className="text-center bg-blue-700 text-white font-serif text-xl py-2 font-bold">Directory App</nav>
@@ -7,6 +8,7 @@ const Home = ()=>{
         <button className="border p-0.5 text-sm text-center bg-blue-500 text-white mx-10">Retrieve Information</button>
       </div>
       <AddPersonInfo/>
+      <DefaultTable/>
     </>)
 }
 

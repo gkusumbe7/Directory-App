@@ -1,63 +1,52 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const AddPersonInfo = () => {
-  const [personName, setPersonName] = useState(" ");
+  const [personName, setPersonName] = useState("");
   const [personDOB, setPersonDOB] = useState("");
   const [personAadhar, setPersonAadhar] = useState("");
   const [personMobile, setPersonMobile] = useState("");
   const [personAge, setPersonAge] = useState("");
-  const [msg , setMsg ]= useState("");
-  const [personInformation, setPersonInformation] = useState([
-    {
-      name: "",
-      dob: "",
-      aadharNo: "",
-      mobileNo: "",
-      age: "",
-      delete:"Delete"
-    },
-  ]);
+  const [personInformation, setPersonInformation] = useState([]);
 
   const savePersonInformation = (e) => {
     e.preventDefault();
-    setPersonName(e.target.personName.value);
-    setPersonDOB(e.target.dob.value);
-    setPersonAadhar(e.target.aadharNumber.value);
-    setPersonMobile(e.target.mobileNumber.value);
-    setPersonAge(e.target.age.value);
-
-    const newPersonInformation = {
+    const newPerson = {
       name: personName,
       dob: personDOB,
       aadharNo: personAadhar,
       mobileNo: personMobile,
       age: personAge,
-      delete:"Delete",
+      delete: "Delete",
     };
-    setPersonInformation([...personInformation, newPersonInformation]);
-  };
 
+    setPersonInformation([...personInformation, newPerson]);
+
+    // Clear the form fields
+    setPersonName("");
+    setPersonDOB("");
+    setPersonAadhar("");
+    setPersonMobile("");
+    setPersonAge("");
+  };
 
   return (
     <>
-      <div className="">
-        {/* Display Data On List */}
+      <div>
         <h1>Add New Person</h1>
         <section>
-          <table className="border tex-sm">
-            <thead className="">
-              <tr className="flex gap-20 border text-md">
-                <th className="w-14">Name</th>
+          <table className="border border-black tex-sm">
+            <thead className="border border-black">
+              <tr className="flex gap-24 text-md">
+                <th className="w-20 ">Name</th>
                 <th className="w-22">DOB</th>
-                <th className="w-20">Aadhar Number</th>
-                <th className="w-20">Mobile Number</th>
+                <th className="w-30">Aadhar Number</th>
+                <th className="w-30">Mobile Number</th>
                 <th className="w-14">Age</th>
                 <th className="w-14">Action</th>
               </tr>
             </thead>
             <tbody>
-
-              { personInformation.map((personData, index) => (
+              {personInformation.map((personData, index) => (
                 <tr key={index} className="flex gap-18 border border-black">
                   <td className="w-20 border">{personData.name}</td>
                   <td className="w-22 border">{personData.dob}</td>
@@ -67,12 +56,9 @@ const AddPersonInfo = () => {
                   <td className="w-20 border">{personData.delete}</td>
                 </tr>
               ))}
-              <span>{msg}</span>
             </tbody>
           </table>
         </section>
-
-        {/* Enter Data */}
 
         <section>
           <form onSubmit={savePersonInformation}>
@@ -83,31 +69,45 @@ const AddPersonInfo = () => {
                   <input
                     type="text"
                     placeholder="Enter Name"
-                    name=""
                     id="personName"
+                    value={personName}
+                    onChange={(e) => setPersonName(e.target.value)}
                   />
                 </td>
                 <td>
-                  <input type="date" name="" id="dob" />
+                  <input
+                    type="date"
+                    id="dob"
+                    value={personDOB}
+                    onChange={(e) => setPersonDOB(e.target.value)}
+                  />
                 </td>
                 <td>
                   <input
                     type="text"
                     placeholder="Enter Aadhar Number"
-                    name=""
                     id="aadharNumber"
+                    value={personAadhar}
+                    onChange={(e) => setPersonAadhar(e.target.value)}
                   />
                 </td>
                 <td>
                   <input
                     type="text"
                     placeholder="Enter Mobile Number"
-                    name=""
                     id="mobileNumber"
+                    value={personMobile}
+                    onChange={(e) => setPersonMobile(e.target.value)}
                   />
                 </td>
                 <td>
-                  <input type="text" placeholder="Enter Age" name="" id="age" />
+                  <input
+                    type="text"
+                    placeholder="Enter Age"
+                    id="age"
+                    value={personAge}
+                    onChange={(e) => setPersonAge(e.target.value)}
+                  />
                 </td>
                 <td>
                   <button type="submit">Save</button>
@@ -117,19 +117,6 @@ const AddPersonInfo = () => {
           </form>
         </section>
       </div>
-
-      {/* <div>
-        {personInformation.map((personData, index) => (
-            <div key={index}>
-            <p>{personData.name}</p>
-            <p>{personData.dob}</p>
-            <p>{personData.aadharNo}</p>
-            <p>{personData.mobileNo}</p>
-            <p>{personData.age}</p>
-            <p>Delete</p>
-          </div>
-        ))}
-      </div> */}
     </>
   );
 };
